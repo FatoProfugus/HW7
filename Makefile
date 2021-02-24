@@ -6,11 +6,13 @@ LDFLAGS=
 
 .PHONY : all test clean 
 
-all: sha3test sha3sum simon.o
-	gcc simon.o -o simon
+all: sha3test simon
 
 simon.o: simon.c
-	gcc -c simon.c
+	$(CC) -c $(CFLAGS) -o $@ $<
+
+simon: simon.o
+	$(CC) -o $@ $^ ${LDFLAGS}
 
 sha3.o: sha3.c
 	$(CC) -c $(CFLAGS) -o $@ $<
